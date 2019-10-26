@@ -1,24 +1,36 @@
 #pragma once
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
 #include <string>
 #include <vector>
 
 using namespace std;
 
-struct Transaction {
+/*******************************************************************************
+ * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
+ *****************************************************************************/
+struct Transaction 
+{
 	string txId;
 	unsigned long int nTxIn;
-	struct vIn {
+	struct vIn 
+	{
 		string blockId;
 		string txId;
+
 	} vIn;
 	unsigned long int nTxOut;
-	struct vOut {
+	struct vOut 
+	{
 		string publicId;
 		unsigned long int amount;
+
 	} vOut;
 };
 
-struct Block {
+struct Block 
+{
 	vector<Transaction> tx;
 	unsigned long int height;
 	unsigned long int nonce;

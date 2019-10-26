@@ -1,3 +1,6 @@
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
 #include "blockChainFinder.h"
 #include <iostream>
 #include <fstream>
@@ -6,6 +9,10 @@
 
 using namespace boost::filesystem;
 
+
+/*******************************************************************************
+ * CASS METHODS DEFINITIONS
+ ******************************************************************************/
 BlockChainFinder::BlockChainFinder() {
 	error = NO_BLOCK_ERROR;
 }

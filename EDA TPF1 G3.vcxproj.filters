@@ -48,10 +48,10 @@
     <ClCompile Include="controller.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="blockChain.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="blockChainFinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="blockChain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
