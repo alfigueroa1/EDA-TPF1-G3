@@ -10,12 +10,12 @@ struct Transaction {
 	struct vIn {
 		string blockId;
 		string txId;
-	};
+	} vIn;
 	unsigned long int nTxOut;
 	struct vOut {
 		string publicId;
 		unsigned long int amount;
-	};
+	} vOut;
 };
 
 struct Block {

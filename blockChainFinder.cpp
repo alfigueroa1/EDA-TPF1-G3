@@ -66,3 +66,81 @@ vector<json> BlockChainFinder::getJSONs(string path) {
 
 	return jsons;
 }
+
+
+
+//Pueden cambiarle el nombre lo que devuelve y recibe
+void JSONparse(Block& block)
+{
+	try
+	{
+		std::ifstream i("test.json"); //Se puede cambiar, no se como recibo el JSON;
+		json j;
+
+		i >> j;
+
+		//Block 
+		auto height = j["height"];
+		block.height = height;
+
+		auto nonce = j["nonce"];
+		block.nonce = nonce;
+
+		auto blockId = j["blockid"];
+		block.blockId = blockId.get<string>();
+
+		auto prevBlockId = j["previousblockid"];
+		block.previousBlockId = prevBlockId.get<string>();
+
+		auto root = j["merkleroot"];
+		block.merkleRoot = root.get<string>();
+
+		auto nTx = j["nTx"];
+		block.nTx = nTx;
+
+		//Transactions
+		auto arrayTrans = j["tx"];
+		for (auto& trans : arrayTrans)
+		{
+			Transaction auxTrans;
+
+			auto txId = trans["txid"];
+			auxTrans.txId = txId.get<string>();
+
+			auto nTxIn = trans["nTxin"];
+			auxTrans.nTxIn = nTxIn;
+
+			auto vIn = trans["vin"];
+			for (auto& elsi : vIn)
+			{
+				auto tBlockId = elsi["blockid"];
+				auxTrans.vIn.blockId = tBlockId.get<string>();
+
+				auto tTxId = elsi["txid"];
+				auxTrans.vIn.txId = tTxId.get<string>();
+			}
+
+			auto nTxOut = trans["nTxout"];
+			auxTrans.nTxOut = nTxOut;
+
+			auto vOut = trans["vout"];
+			for (auto& elso : vOut)
+			{
+				auto publicId = elso["publicid"];
+				auxTrans.vOut.publicId = publicId.get<string>();
+
+				auto amount = elso["amount"];
+				auxTrans.vOut.amount = amount;
+			}
+
+			block.tx.push_back(auxTrans);
+		}
+
+	}
+
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << std::endl; //Es posible que este mall el JSON?
+	}
+
+}
