@@ -14,6 +14,7 @@ struct Transaction {
 	string relayed_by;
 	unsigned int block_height;
 	string tx_index;
+
 	struct inputs {
 		struct prev_out {
 			string hash;
@@ -23,6 +24,7 @@ struct Transaction {
 		};
 		string script;
 	};
+
 	struct out {
 		string value;
 		string hash;
