@@ -5,6 +5,31 @@
 using namespace std;
 
 struct Transaction {
+	string txId;
+	unsigned long int nTxIn;
+	struct vIn {
+		string blockId;
+		string txId;
+	};
+	unsigned long int nTxOut;
+	struct vOut {
+		string publicId;
+		unsigned long int amount;
+	};
+};
+
+struct Block {
+	vector<Transaction> tx;
+	unsigned long int height;
+	unsigned long int nonce;
+	string blockId;
+	string previousBlockId;
+	string merkleRoot;
+	unsigned long int nTx;
+};
+
+typedef vector<Block> BlockChain;
+/*struct Transaction {
 	string hash;
 	int ver;
 	int vin_sz;
@@ -49,6 +74,4 @@ struct Block {
 	string relayed_by;
 	vector<Transaction> tx;
 
-};
-
-typedef vector<Block> BlockChain;
+};*/
