@@ -3,6 +3,10 @@
 #include "imgui.h"
 #include "imgui_impl_allegro5.h"
 
+#include "controller.h";
+#include "model.h"
+#include "viewer.h"
+
 static void init_interface(ALLEGRO_DISPLAY*& display, ALLEGRO_EVENT_QUEUE*& queue);
 static void close_interface(ALLEGRO_DISPLAY*& display, ALLEGRO_EVENT_QUEUE*& queue);
 
@@ -25,17 +29,21 @@ void alexTesteaImGui(void) {
 	ALLEGRO_EVENT_QUEUE* queue;
 
 	init_interface(display, queue);
-
 	ImVec4 backColor = ImVec4(0.f, 0.75f, 0.75f, 1.f);
+
+	Model m;
+	Controller c(m);
+	Viewer v;
+
+	m.attach(c);
+	m.attach(v);
 
 	bool running = true;
 	while (running) {
 		start_frame(display, queue, running);
 
-
-		ImGui::Begin("Oh yeah Mr. Crabs!",&running);
-		ImGui::Text("Nyan!");
-		ImGui::End();
+		c.cycle();
+		v.cycle();
 
 		end_frame(backColor);
 	}
