@@ -20,11 +20,24 @@ BlockChain BlockChainFinder::getBlockChain(string path) {
 	return chain;
 }
 
-vector<string> BlockChainFinder::getJSONNames(string path) {
+vector<json> BlockChainFinder::getJSONs(string path) {
+	vector<json> jsons;
+	if (getJSONNames(path)) {
+		for (string name : jsonNames) {
+			if (/*!isJsonAValidBlockChain(name)*/true) {
+
+			}
+
+		}
+	}
+	return jsons;
+}
+
+bool BlockChainFinder::getJSONNames(string path) {
 	string fileExtension;
+	bool ret = true;
 	error = NO_BLOCK_ERROR;
-	vector<string> jsons;
-	jsons.clear();
+	jsonNames.clear();
 
 	if (exists(path))    // Existe el path?
 	{
@@ -40,7 +53,7 @@ vector<string> BlockChainFinder::getJSONNames(string path) {
 				{
 					string aux;
 					aux = x.path().generic_path().string().c_str();
-					jsons.push_back(aux);
+					jsonNames.push_back(aux);
 					//cout << aux << " es un archivo .json valido" << std::endl; //DEBUGGING
 				}
 			}
@@ -53,30 +66,24 @@ vector<string> BlockChainFinder::getJSONNames(string path) {
 	else {
 		cout << path << " does not exist\n";	//DEBUGGING
 		error = INVALID_PATH;
-		return jsons;
+		ret = false;
 	}
-	if (jsons.empty())
+	if (jsonNames.empty()) {
 		error = NOT_FOUND;
-	return jsons;
+		ret = false;
+	}
+	return ret;
 }
 
-
-vector<json> BlockChainFinder::getJSONs(string path) {
-	vector<json> jsons;
-
-	return jsons;
-}
 
 
 
 //Pueden cambiarle el nombre lo que devuelve y recibe
-void JSONparse(Block& block)
-{
-	try
-	{
+bool JSONparse(Block& block){
+	bool ret = true;
+	try{
 		std::ifstream i("test.json"); //Se puede cambiar, no se como recibo el JSON;
 		json j;
-
 		i >> j;
 
 		//Block 
@@ -100,8 +107,7 @@ void JSONparse(Block& block)
 
 		//Transactions
 		auto arrayTrans = j["tx"];
-		for (auto& trans : arrayTrans)
-		{
+		for (auto& trans : arrayTrans){
 			Transaction auxTrans;
 
 			auto txId = trans["txid"];
@@ -111,8 +117,7 @@ void JSONparse(Block& block)
 			auxTrans.nTxIn = nTxIn;
 
 			auto vIn = trans["vin"];
-			for (auto& elsi : vIn)
-			{
+			for (auto& elsi : vIn){
 				auto tBlockId = elsi["blockid"];
 				auxTrans.vIn.blockId = tBlockId.get<string>();
 
@@ -132,15 +137,12 @@ void JSONparse(Block& block)
 				auto amount = elso["amount"];
 				auxTrans.vOut.amount = amount;
 			}
-
 			block.tx.push_back(auxTrans);
 		}
-
 	}
-
-	catch (std::exception& e)
-	{
+	catch (std::exception& e){
 		std::cerr << e.what() << std::endl; //Es posible que este mall el JSON?
+		ret = false;
 	}
-
+	return ret;
 }

@@ -18,9 +18,12 @@ public:
 	BlockChainFinder();
 	~BlockChainFinder();
 	BlockChain getBlockChain(string path);
-	vector<string> getJSONNames(string path);
+	bool getJSONNames(string path);
 	BlockChainError getError() { return error; }
 private:
 	vector<json> getJSONs(string path);
+
+
+	vector<string> jsonNames;
 	BlockChainError error;
 };
