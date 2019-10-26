@@ -1,5 +1,7 @@
 #pragma once
-
+/*******************************************************************************
+ * INCLUDE HEADER FILES
+ ******************************************************************************/
 #include <string>
 #include <vector>
 #include "json.hpp"
@@ -8,19 +10,29 @@
 using namespace std;
 using json = nlohmann::json;
 
-typedef enum {
-	NO_BLOCK_ERROR, NOT_FOUND, INVALID_JSON, EMPTY_FOLDER, INVALID_PATH
-} BlockChainError;
+
+/*******************************************************************************
+ * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
+ *****************************************************************************/
+typedef enum { NO_BLOCK_ERROR, NOT_FOUND, INVALID_JSON, EMPTY_FOLDER, INVALID_PATH } BlockChainError;
 
 
-class BlockChainFinder {
+/*******************************************************************************
+ * CLASS PROTOTYPE
+ ******************************************************************************/
+class BlockChainFinder 
+{
 public:
 	BlockChainFinder();
 	~BlockChainFinder();
 	BlockChain getBlockChain(string path);
-	vector<string> getJSONNames(string path);
+	bool getJSONNames(string path);
 	BlockChainError getError() { return error; }
+
 private:
 	vector<json> getJSONs(string path);
+
+
+	vector<string> jsonNames;
 	BlockChainError error;
 };
