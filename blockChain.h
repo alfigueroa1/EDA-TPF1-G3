@@ -10,12 +10,12 @@ struct Transaction {
 	struct vIn {
 		string blockId;
 		string txId;
-	};
+	} vIn;
 	unsigned long int nTxOut;
 	struct vOut {
 		string publicId;
 		unsigned long int amount;
-	};
+	} vOut;
 };
 
 struct Block {
@@ -39,6 +39,7 @@ typedef vector<Block> BlockChain;
 	string relayed_by;
 	unsigned int block_height;
 	string tx_index;
+
 	struct inputs {
 		struct prev_out {
 			string hash;
@@ -48,6 +49,7 @@ typedef vector<Block> BlockChain;
 		};
 		string script;
 	};
+
 	struct out {
 		string value;
 		string hash;
