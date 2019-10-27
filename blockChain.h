@@ -42,7 +42,17 @@ struct Block
 
 typedef vector<Block> BlockChain;
 
-struct MerkelTree; //COMPLETAR ACA CON LA FORMA EN Q SE GUARDA EL CONTENIDO DE UN TREE PROCESADO
+typedef unsigned char newIDstr[4]; //OJO CON TERMINADOR NULO!!! (puede aparecer en el medio del arreglo, y claro esta, no hay un 5to elemento)
+
+struct MerkelTree { //COMPLETAR ACA CON LA FORMA EN Q SE GUARDA EL CONTENIDO DE UN TREE PROCESADO
+	unsigned long int height;
+	unsigned long int nonce;
+	string blockId;	//OJO CON STRINGS Y ARCHIVOS BINARIOS!!!
+	string previousBlockId;
+	newIDstr merkleRoot;
+	unsigned long int nTx;
+	vector<newIDstr> tree;	//FORMATO	A B C D AB CD ABCD porq a Ale le parece mas facil de hacer
+};
 
 
 
