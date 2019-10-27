@@ -7,10 +7,17 @@
 
 fileController::fileController(Model& model) {
 	m = &model;
+	filenames.push_back("file1");
+	filenames.push_back("file2");
+	filenames.push_back("file3");
 
 }
 
+void fileController::cycle() {
+	askPath();
 
+
+}
 
 void fileController::askPath() {
 
@@ -22,8 +29,11 @@ void fileController::askPath() {
 	ImGui::InputText("Path", path, _MAX_PATH);
 	ImGui::SameLine();
 	if (ImGui::Button("Submit")) {
-		m->getFilenames(path);
+		//m->getFilenames(path, filenames);		//busca los .json en el path
 	}
+
+	for (int i = 0; i < filenames.size(); i++)
+		ImGui::Selectable(filenames[i].c_str());
 
 	ImGui::End();
 
