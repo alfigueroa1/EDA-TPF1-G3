@@ -53,5 +53,21 @@ void treeWindow::validateRoot(void)
 
 void treeWindow::drawTree(void)
 {
+	if (ImGui::TreeNode("Merkle Tree")) {
+		ImGui::BeginChild("child", ImVec2(0, 0), true, ImGuiWindowFlags_HorizontalScrollbar);
+		{
+			static bool f = false;
+			static bool t = true;
+			ImGui::SetCursorPos(ImVec2(20,20));
+			ImGui::Checkbox("", &t);
+			if (ImGui::IsItemHovered())
+				ImGui::SetTooltip("Oh Yeah Mr. Crabs!!");
+
+			f = false;
+			t = true;
+		}
+		ImGui::EndChild();
+		ImGui::TreePop();
+	}
 	//TO DO!!!!
 }
