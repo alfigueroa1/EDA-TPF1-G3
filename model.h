@@ -4,7 +4,7 @@
  ******************************************************************************/
 #include "blockChain.h"
 #include "subject.h"
-
+#include "blockChainFinder.h"
 
 /*******************************************************************************
  * CLASS PROTOTYPE
@@ -16,7 +16,8 @@ public:
 	~Model(void);
 
 	//Metodos llamados desde el controller:
-
+	//Cuando se presiona "search" se llama a getBlockChainNames()
+	vector<string>* getBlockChainNames(string path);
 	//Cuando en la ventana 1 se selecciona un determinado Json:
 	void openBlockChain(string path); //Abre el archivo apuntado por path (descarga su contenido, el de todos sus bloques, pero SIN CALCULAR LOS TREES)
 	//Cuando en la ventana 2 se selecciono un determinado Bloque
@@ -26,7 +27,7 @@ public:
 
 	//Metodos llamados desde el viewer
 	//Nota de getOpenTree(): cuando se acaba de abrir un Chain, no se abrio todavia ningun bloque, por lo q esta funcion podria devolver nullptr. De este modo, evitamos el flag "CreateNewWindow"
-	const MerkelTree* getOpenTree(); //Devuelve la estructura del ultimo tree abierto (consecuencia de openBlock)
+	const MerkleTree* getOpenTree(); //Devuelve la estructura del ultimo tree abierto (consecuencia de openBlock)
 	//bool replaceLastTree(); //En caso de utilizar, en la ventana 2, teclas "Previous"/"Next", sera necesario una variable q valga FALSE si se llamo por ultima vez a openBlock, o TRUE, si se llamo a una hipotetica funcion openNext/openPrev
 
 
@@ -36,7 +37,9 @@ public:
 
 
 private:
-
+	void getMerkleTree();
+	BlockChainFinder finder;
 	BlockChain blockChain;
-	unsigned int curr;
+	MerkleTree tree;
+	vector<Block>::iterator curr;
 };

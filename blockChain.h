@@ -42,9 +42,10 @@ struct Block
 
 typedef vector<Block> BlockChain;
 
-typedef unsigned char newIDstr[4]; //OJO CON TERMINADOR NULO!!! (puede aparecer en el medio del arreglo, y claro esta, no hay un 5to elemento)
+//typedef unsigned char newIDstr[4]; //OJO CON TERMINADOR NULO!!! (puede aparecer en el medio del arreglo, y claro esta, no hay un 5to elemento)
+typedef string newIDstr;
 
-struct MerkelTree { //COMPLETAR ACA CON LA FORMA EN Q SE GUARDA EL CONTENIDO DE UN TREE PROCESADO
+struct MerkleTree { //COMPLETAR ACA CON LA FORMA EN Q SE GUARDA EL CONTENIDO DE UN TREE PROCESADO
 	unsigned long int height;
 	unsigned long int nonce;
 	string blockId;	//OJO CON STRINGS Y ARCHIVOS BINARIOS!!!
