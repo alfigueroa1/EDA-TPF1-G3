@@ -14,5 +14,5 @@ public:
 	void cycle(void);//Funciones de dibujo
 
 private:
-	map<string, treeWindow> windowList;
+	map<unsigned long int, treeWindow> windowList;
 };

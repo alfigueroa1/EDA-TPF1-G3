@@ -26,6 +26,7 @@ public:
 
 	//Metodos llamados desde el viewer
 	//Nota de getOpenTree(): cuando se acaba de abrir un Chain, no se abrio todavia ningun bloque, por lo q esta funcion podria devolver nullptr. De este modo, evitamos el flag "CreateNewWindow"
+	//Asimismo, solo si getOpenTree() devuelve null, se cierran todas las ventanas de merkel tree (del viewer) abiertas
 	const MerkelTree* getOpenTree() {} //Devuelve la estructura del ultimo tree abierto (consecuencia de openBlock)
 	//bool replaceLastTree(); //En caso de utilizar, en la ventana 2, teclas "Previous"/"Next", sera necesario una variable q valga FALSE si se llamo por ultima vez a openBlock, o TRUE, si se llamo a una hipotetica funcion openNext/openPrev
 
