@@ -12,5 +12,12 @@ public:
 private:
 	MerkelTree tree;
 	bool open;
+
+	string windowName;
+
+	bool validRoot;
+	void validateRoot(void);
+
+	void drawTree(void);
 };
 
