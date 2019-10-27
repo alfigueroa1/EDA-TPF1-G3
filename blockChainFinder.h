@@ -25,14 +25,16 @@ class BlockChainFinder
 public:
 	BlockChainFinder();
 	~BlockChainFinder();
+
 	BlockChain getBlockChain(string path);
 	bool getJSONNames(string path);
 	BlockChainError getError() { return error; }
 
+	bool JSONparse(BlockChain blockchain);
+	bool isJsonAValidBlockChain();
+
 private:
 	vector<json> getJSONs(string path);
-
-
 	vector<string> jsonNames;
 	BlockChainError error;
 };
