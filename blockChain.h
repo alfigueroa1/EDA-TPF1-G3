@@ -41,6 +41,11 @@ struct Block
 };
 
 typedef vector<Block> BlockChain;
+
+struct MerkelTree; //COMPLETAR ACA CON LA FORMA EN Q SE GUARDA EL CONTENIDO DE UN TREE PROCESADO
+
+
+
 /*struct Transaction {
 	string hash;
 	int ver;
