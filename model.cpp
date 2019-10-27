@@ -26,5 +26,8 @@ Block Model::getBlock(void)
 	}
 }
 
+
+
+unsigned long int Model::getNumberOfBlocks(void) { return blockChain.size(); }
 unsigned int Model::getCurr(void){ return curr; }
 
