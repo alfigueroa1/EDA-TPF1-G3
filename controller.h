@@ -2,12 +2,15 @@
 
 #include "model.h"
 
-class Controller : public Observer {
+class fileController : public Observer {
 public:
-	Controller(Model& m) { model = &m; }
+	fileController(Model&);
 	virtual void update(void*){}
 	void cycle(void){}
 
 private:
-	Model* model;
+	Model* m;
+	char path[_MAX_PATH];
+	vector<string> filenames;
+	void askPath();
 };
