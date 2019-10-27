@@ -45,16 +45,17 @@ typedef vector<Block> BlockChain;
 
 typedef std::string newIDstr;	//Cambie de parecer. Q los IDs sean strings
 //typedef unsigned char newIDstr[4]; //antigua definicion
+typedef unsigned long int longN;
 
 struct MerkelTree { //COMPLETAR ACA CON LA FORMA EN Q SE GUARDA EL CONTENIDO DE UN TREE PROCESADO
 	vector<newIDstr> tree;	//FORMATO	A B C D AB CD ABCD porq a Ale le parece mas facil de hacer
 
-	unsigned long int height;
-	unsigned long int nonce;
+	longN height;
+	longN nonce;
 	string blockId;	//OJO CON STRINGS Y ARCHIVOS BINARIOS!!!
 	string previousBlockId;
 	newIDstr merkleRoot;
-	unsigned long int nTx;
+	longN nTx;
 
 	//Constructor por defecto
 	MerkelTree() : tree(), height(0), nonce(0), blockId(),
