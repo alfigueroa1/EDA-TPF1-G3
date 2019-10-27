@@ -54,6 +54,9 @@
     <ClCompile Include="blockChain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="treeWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imconfig.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="blockChain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="treeWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -90,72 +90,242 @@ bool BlockChainFinder::getJSONNames(string path) {
 
 
 
-
-//Pueden cambiarle el nombre lo que devuelve y recibe
-bool JSONparse(Block& block){
+//Elijan cual les gusta mas
+bool BlockChainFinder::JSONparse(BlockChain blockchain )
+{
 	bool ret = true;
-	try{
+
+	try
+	{
 		std::ifstream i("test.json"); //Se puede cambiar, no se como recibo el JSON;
 		json j;
 		i >> j;
 
-		//Block 
-		auto height = j["height"];
-		block.height = height;
+		for (auto& blocks : j)
+		{
+			//Block 
+			Block block;
 
-		auto nonce = j["nonce"];
-		block.nonce = nonce;
+			auto height = blocks["height"];
+			block.height = height;
 
-		auto blockId = j["blockid"];
-		block.blockId = blockId.get<string>();
+			auto nonce = blocks["nonce"];
+			block.nonce = nonce;
 
-		auto prevBlockId = j["previousblockid"];
-		block.previousBlockId = prevBlockId.get<string>();
+			auto blockId = blocks["blockid"];
+			block.blockId = blockId.get<string>();
 
-		auto root = j["merkleroot"];
-		block.merkleRoot = root.get<string>();
+			auto prevBlockId = blocks["previousblockid"];
+			block.previousBlockId = prevBlockId.get<string>();
 
-		auto nTx = j["nTx"];
-		block.nTx = nTx;
+			auto root = blocks["merkleroot"];
+			block.merkleRoot = root.get<string>();
 
-		//Transactions
-		auto arrayTrans = j["tx"];
-		for (auto& trans : arrayTrans){
-			Transaction auxTrans;
+			auto nTx = blocks["nTx"];
+			block.nTx = nTx;
 
-			auto txId = trans["txid"];
-			auxTrans.txId = txId.get<string>();
-
-			auto nTxIn = trans["nTxin"];
-			auxTrans.nTxIn = nTxIn;
-
-			auto vIn = trans["vin"];
-			for (auto& elsi : vIn){
-				auto tBlockId = elsi["blockid"];
-				auxTrans.vIn.blockId = tBlockId.get<string>();
-
-				auto tTxId = elsi["txid"];
-				auxTrans.vIn.txId = tTxId.get<string>();
-			}
-
-			auto nTxOut = trans["nTxout"];
-			auxTrans.nTxOut = nTxOut;
-
-			auto vOut = trans["vout"];
-			for (auto& elso : vOut)
+			//Transactions
+			auto arrayTrans = blocks["tx"];
+			for (auto& trans : arrayTrans)
 			{
-				auto publicId = elso["publicid"];
-				auxTrans.vOut.publicId = publicId.get<string>();
+				Transaction auxTrans;
 
-				auto amount = elso["amount"];
-				auxTrans.vOut.amount = amount;
+				auto txId = trans["txid"];
+				auxTrans.txId = txId.get<string>();
+
+				auto nTxIn = trans["nTxin"];
+				auxTrans.nTxIn = nTxIn;
+
+				auto vIn = trans["vin"];
+				for (auto& elsi : vIn){
+					auto tBlockId = elsi["blockid"];
+					auxTrans.vIn.blockId = tBlockId.get<string>();
+
+					auto tTxId = elsi["txid"];
+					auxTrans.vIn.txId = tTxId.get<string>();
+				}
+
+				auto nTxOut = trans["nTxout"];
+				auxTrans.nTxOut = nTxOut;
+
+				auto vOut = trans["vout"];
+				for (auto& elso : vOut)
+				{
+					auto publicId = elso["publicid"];
+					auxTrans.vOut.publicId = publicId.get<string>();
+
+					auto amount = elso["amount"];
+					auxTrans.vOut.amount = amount;
+				}
+
+				block.tx.push_back(auxTrans);
 			}
-			block.tx.push_back(auxTrans);
+
+			blockchain.push_back(block);
 		}
 	}
-	catch (std::exception& e){
-		std::cerr << e.what() << std::endl; //Es posible que este mall el JSON?
+
+	catch (std::exception& e)
+	{
 		ret = false;
 	}
+
 	return ret;
+}
+
+bool BlockChainFinder::isJsonAValidBlockChain1()
+{
+	bool ret = false;
+
+	try
+	{
+		std::ifstream i("test.json");
+		json j;
+
+		i >> j;
+
+		//Block
+		for (auto& blocks : j)	//Parsea todos los bloques
+		{
+			if (blocks.size() == 7) //Si son 7 elementos
+			{
+				blocks.at("height");
+				blocks.at("nonce");
+				blocks.at("blockid");	//Se fija que sean los correspondientes
+				blocks.at("previousblockid");
+				blocks.at("merkleroot");
+				blocks.at("nTx");
+				blocks.at("height");
+				blocks.at("tx");
+
+				//Transactions
+				auto arrayTrans = blocks["tx"];
+				for (auto& trans : arrayTrans)	//Parsea todas las transacciones
+				{
+					if (trans.size() == 5)	//Si son 5 elementos
+					{
+						trans.at("txid");
+						trans.at("nTxin");
+						trans.at("vin");	//Se fija que sean los correctos
+						trans.at("nTxout");
+						trans.at("vout");
+
+						auto vIn = trans["vin"];
+						auto vOut = trans["vout"];
+						for (auto& elsi : vIn)
+						{
+							if (elsi.size() != 2)
+							{
+								ret = false;
+							}
+							else
+							{
+								elsi.at("blockid");
+								elsi.at("txid");
+								ret = true;
+							}
+						}
+
+						for (auto& elso : vOut)
+						{
+							if (elso.size() != 2)
+							{
+								ret = false;
+							}
+							else
+							{
+								elso.at("publicid");
+								elso.at("amount");
+
+								ret = true;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	catch (std::exception& e)
+	{
+		ret = false;
+	}
+
+	return ret;
+}
+
+
+bool BlockChainFinder::isJsonAValidBlockChain2()
+{
+	try
+	{
+		std::ifstream i("test.json");
+		json j;
+
+		i >> j;
+
+		//Block
+		for (auto& blocks : j)	//Parsea todos los bloques
+		{
+			if (blocks.size() != 7) //Si son 7 elementos
+			{
+				return false;
+			}
+
+			blocks.at("height");
+			blocks.at("nonce");
+			blocks.at("blockid");
+			blocks.at("previousblockid");
+			blocks.at("merkleroot");
+			blocks.at("nTx");
+			blocks.at("height");
+			blocks.at("tx");
+
+			//Transactions
+			auto arrayTrans = blocks["tx"];
+			for (auto& trans : arrayTrans)	//Parsea todas las transacciones
+			{
+				if (trans.size() != 5)	//Si son 5 elementos
+				{
+					return false;
+				}
+
+				trans.at("txid");
+				trans.at("nTxin");
+				trans.at("vin");	//Se fija que sean los correctos
+				trans.at("nTxout");
+				trans.at("vout");
+				auto vIn = trans["vin"];
+				auto vOut = trans["vout"];
+				for (auto& elsi : vIn)
+				{
+					if (elsi.size() != 2)
+					{
+						return false;
+					}
+
+					elsi.at("blockid");
+					elsi.at("txid");
+				}
+
+				for (auto& elso : vOut)
+				{
+					if (elso.size() != 2)
+					{
+						return false;
+					}
+
+					elso.at("publicid");
+					elso.at("amount");
+				}
+			}
+		}
+	}
+
+	catch (std::exception& e)
+	{
+		return false;
+	}
+
+	return true;
 }
