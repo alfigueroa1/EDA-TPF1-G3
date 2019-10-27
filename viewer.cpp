@@ -32,12 +32,12 @@ void Viewer::cycle(void)
 {
 	if (windowList.empty() == false) {
 
-		std::_Tree_iterator<pair<longN, treeWindow>>::value_type closing; //auto no me salvo de esta
+		map<longN,treeWindow>::iterator closing, it; //auto no me salvo de esta
 		bool closeWindow = false;
 
-		for (auto it : windowList) {
-			it.second.draw();
-			if (it.second.isOpen() == false) {
+		for (it = windowList.begin(); it != windowList.end();it++) {
+			it->second.draw();
+			if (it->second.isOpen() == false) {
 				closeWindow = true;
 				closing = it;
 			}
