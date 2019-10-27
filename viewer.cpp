@@ -14,9 +14,17 @@ void Viewer::update(void* m)
 		windowList.clear();
 	}
 	else {
-		map<string, treeWindow>::iterator it;
-		if((it = windowList.find(incoming->merkleRoot)) == windowList.end() )
-		//try to get a new window
+		map<longN, treeWindow>::iterator it;
+		if ((it = windowList.find(incoming->height)) == windowList.end())
+		{
+			windowList.emplace(incoming->height,*incoming);
+			//agregar ventana
+		}
+		else
+		{
+			it->second.replace(*incoming);
+			//Reemplazar existente
+		}
 	}
 }
 
@@ -24,7 +32,7 @@ void Viewer::cycle(void)
 {
 	if (windowList.empty() == false) {
 
-		std::_Tree_iterator<pair<string, treeWindow>>::value_type closing; //auto no me salvo de esta
+		std::_Tree_iterator<pair<longN, treeWindow>>::value_type closing; //auto no me salvo de esta
 		bool closeWindow = false;
 
 		for (auto it : windowList) {
