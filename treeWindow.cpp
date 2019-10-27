@@ -33,7 +33,7 @@ void treeWindow::draw(void) {
 
 	drawTree();
 
-	ImGui::End;
+	ImGui::End();
 }
 
 bool treeWindow::isOpen(void)

@@ -3,8 +3,12 @@
 #include "imgui.h"
 #include "imgui_impl_allegro5.h"
 
-#include "controller.h"
-#include "model.h"
+//#include "controller.h"
+//#include "model.h"
+void initAlex(void);
+
+#include "Alex_controller.h"
+#include "alex_model.h"
 #include "viewer.h"
 
 static void init_interface(ALLEGRO_DISPLAY*& display, ALLEGRO_EVENT_QUEUE*& queue);
@@ -24,6 +28,7 @@ int main() {
 }
 
 void alexTesteaImGui(void) {
+	initAlex();
 
 	ALLEGRO_DISPLAY* display;
 	ALLEGRO_EVENT_QUEUE* queue;
@@ -31,8 +36,8 @@ void alexTesteaImGui(void) {
 	init_interface(display, queue);
 	ImVec4 backColor = ImVec4(0.f, 0.75f, 0.75f, 1.f);
 
-	Model m;
-	Controller c(m);
+	alex_model m;
+	alex_controller c(m);
 	Viewer v;
 
 	m.attach(c);

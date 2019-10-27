@@ -19,6 +19,12 @@
     <Filter Include="Header Files\Aditional">
       <UniqueIdentifier>{d365a615-7eec-4241-b9e0-d7e2488c485b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Alex TESTING VIEWER">
+      <UniqueIdentifier>{90f9d7f4-965b-4d1c-bf67-6c0703a2c05b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Alex TESTING VIEWER">
+      <UniqueIdentifier>{c03a1a18-4e3f-4e7e-932a-550905b03b3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,16 +45,7 @@
     <ClCompile Include="imgui_widgets.cpp">
       <Filter>Source Files\Aditional</Filter>
     </ClCompile>
-    <ClCompile Include="model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="viewer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="blockChainFinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="blockChain.cpp">
@@ -56,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="treeWindow.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="alex_test_trees.cpp">
+      <Filter>Source Files\Alex TESTING VIEWER</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,19 +89,10 @@
     <ClInclude Include="viewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="subject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="blockChainFinder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="blockChain.h">
@@ -109,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="treeWindow.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Alex_controller.h">
+      <Filter>Header Files\Alex TESTING VIEWER</Filter>
+    </ClInclude>
+    <ClInclude Include="alex_model.h">
+      <Filter>Header Files\Alex TESTING VIEWER</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

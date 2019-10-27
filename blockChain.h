@@ -61,8 +61,10 @@ struct MerkelTree { //COMPLETAR ACA CON LA FORMA EN Q SE GUARDA EL CONTENIDO DE 
 	MerkelTree() : tree(), height(0), nonce(0), blockId(),
 		previousBlockId(), merkleRoot(), nTx(0) {}
 	//Constructor copiador
-	MerkelTree(const MerkelTree& c):tree(c.tree), height(c.height), nonce(c.nonce), blockId(c.blockId),
-		previousBlockId(c.previousBlockId), merkleRoot(c.merkleRoot), nTx(c.nTx) {}
+	MerkelTree(const MerkelTree& c): height(c.height), nonce(c.nonce), blockId(c.blockId),
+		previousBlockId(c.previousBlockId), merkleRoot(c.merkleRoot), nTx(c.nTx) {
+		tree = c.tree;
+	}
 	//Operador de asignacion
 	MerkelTree& operator=(const MerkelTree& c) {
 		tree = c.tree;

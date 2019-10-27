@@ -1,5 +1,8 @@
 #include "viewer.h"
-#include "model.h"
+//
+#include "alex_model.h"
+//
+typedef alex_model Model;
 
 Viewer::Viewer() : windowList()
 {

@@ -149,22 +149,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="alex_test_trees.cpp" />
     <ClCompile Include="blockChain.cpp" />
-    <ClCompile Include="blockChainFinder.cpp" />
-    <ClCompile Include="controller.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="imgui_demo.cpp" />
     <ClCompile Include="imgui_draw.cpp" />
     <ClCompile Include="imgui_impl_allegro5.cpp" />
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="model.cpp" />
     <ClCompile Include="treeWindow.cpp" />
     <ClCompile Include="viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Alex_controller.h" />
+    <ClInclude Include="alex_model.h" />
     <ClInclude Include="blockChain.h" />
-    <ClInclude Include="controller.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imconfig_allegro5.h" />
     <ClInclude Include="imgui.h" />
@@ -174,8 +173,6 @@
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="json.hpp" />
-    <ClInclude Include="blockChainFinder.h" />
-    <ClInclude Include="model.h" />
     <ClInclude Include="observer.h" />
     <ClInclude Include="subject.h" />
     <ClInclude Include="treeWindow.h" />
