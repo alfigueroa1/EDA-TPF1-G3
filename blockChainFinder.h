@@ -27,6 +27,7 @@ public:
 	~BlockChainFinder();
 
 	BlockChain getBlockChain(string path);
+	vector<string>* getValidJSONs(string path);
 	bool getJSONNames(string path);
 	BlockChainError getError() { return error; }
 

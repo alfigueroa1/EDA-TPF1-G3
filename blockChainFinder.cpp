@@ -27,17 +27,23 @@ BlockChain BlockChainFinder::getBlockChain(string path) {
 	return chain;
 }
 
-vector<json> BlockChainFinder::getJSONs(string path) {
-	vector<json> jsons;
-	if (getJSONNames(path)) {
-		for (string name : jsonNames) {
-			if (/*!isJsonAValidBlockChain(name)*/true) {
-
-			}
-
+vector<string>* BlockChainFinder::getValidJSONs(string path) {
+	bool ret = true;
+	if (getJSONNames(path)) {											//If path contains .json files
+		//auto i = jsonNames.begin();
+		for (auto i = jsonNames.begin(); i != jsonNames.end(); i++) {
+			if (/*!isJsonAValidBlockChain(name)*/true)
+				jsonNames.erase(i--);									//Removes invalid json files (json not a valid blockchain)
 		}
+		if (jsonNames.empty())
+			ret = false;
 	}
-	return jsons;
+	else
+		ret = false;
+	if (ret)
+		return &jsonNames;
+	else
+		return nullptr;
 }
 
 bool BlockChainFinder::getJSONNames(string path) {

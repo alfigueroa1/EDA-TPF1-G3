@@ -3,7 +3,7 @@
 #include "imgui.h"
 #include "imgui_impl_allegro5.h"
 
-#include "controller.h";
+#include "controller.h"
 #include "model.h"
 #include "viewer.h"
 
