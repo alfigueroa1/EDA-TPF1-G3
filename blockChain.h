@@ -47,7 +47,7 @@ typedef std::string newIDstr;	//Cambie de parecer. Q los IDs sean strings
 //typedef unsigned char newIDstr[4]; //antigua definicion
 typedef unsigned long int longN;
 
-struct MerkelTree { //COMPLETAR ACA CON LA FORMA EN Q SE GUARDA EL CONTENIDO DE UN TREE PROCESADO
+struct MerkleTree { //COMPLETAR ACA CON LA FORMA EN Q SE GUARDA EL CONTENIDO DE UN TREE PROCESADO
 	vector<newIDstr> tree;	//FORMATO	A B C D AB CD ABCD porq a Ale le parece mas facil de hacer
 
 	longN height;
@@ -58,13 +58,13 @@ struct MerkelTree { //COMPLETAR ACA CON LA FORMA EN Q SE GUARDA EL CONTENIDO DE 
 	longN nTx;
 
 	//Constructor por defecto
-	MerkelTree() : tree(), height(0), nonce(0), blockId(),
+	MerkleTree() : tree(), height(0), nonce(0), blockId(),
 		previousBlockId(), merkleRoot(), nTx(0) {}
 	//Constructor copiador
-	MerkelTree(const MerkelTree& c):tree(c.tree), height(c.height), nonce(c.nonce), blockId(c.blockId),
+	MerkleTree(const MerkleTree& c):tree(c.tree), height(c.height), nonce(c.nonce), blockId(c.blockId),
 		previousBlockId(c.previousBlockId), merkleRoot(c.merkleRoot), nTx(c.nTx) {}
 	//Operador de asignacion
-	MerkelTree& operator=(const MerkelTree& c) {
+	MerkleTree& operator=(const MerkleTree& c) {
 		tree = c.tree;
 		height = c.height;
 		nonce = c.nonce;
