@@ -26,16 +26,15 @@ public:
 	BlockChainFinder();
 	~BlockChainFinder();
 
-	BlockChain getBlockChain(string path);
 	vector<string>* getValidJSONs(string path);
 	bool getJSONNames(string path);
 	BlockChainError getError() { return error; }
 
-	bool JSONparse(BlockChain& blockchain, string path, );
-	bool isJsonAValidBlockChain();
+	void saveBlockChain(BlockChain& blockchain, string path);
+	bool isJsonAValidBlockChain(string path);
 
 private:
-	vector<json> getJSONs(string path);
+
 	vector<string> jsonNames;
 	BlockChainError error;
 };
