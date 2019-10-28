@@ -91,13 +91,13 @@ bool BlockChainFinder::getJSONNames(string path) {
 
 
 //Elijan cual les gusta mas
-bool BlockChainFinder::JSONparse(BlockChain blockchain )
+bool BlockChainFinder::JSONparse(BlockChain& blockchain, string path)
 {
 	bool ret = true;
 
 	try
 	{
-		std::ifstream i("test.json"); //Se puede cambiar, no se como recibo el JSON;
+		std::ifstream i(path.c_str()); //Se puede cambiar, no se como recibo el JSON;
 		json j;
 		i >> j;
 

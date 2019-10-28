@@ -31,7 +31,7 @@ public:
 	bool getJSONNames(string path);
 	BlockChainError getError() { return error; }
 
-	bool JSONparse(BlockChain blockchain);
+	bool JSONparse(BlockChain& blockchain, string path, );
 	bool isJsonAValidBlockChain();
 
 private:
