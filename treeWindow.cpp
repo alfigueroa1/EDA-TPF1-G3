@@ -35,6 +35,7 @@ void treeWindow::draw(void) {
 		ImGui::Text("ID del bloque anterior: %s", tree.previousBlockId.c_str());
 		ImGui::Text("Numero de transaccioens: %lu", tree.nTx);
 		ImGui::Text("Nonce: %lu", tree.nonce);
+		ImGui::Text("Merkel Root: %s", tree.merkleRoot.c_str());
 		ImGui::TreePop();
 	}
 
