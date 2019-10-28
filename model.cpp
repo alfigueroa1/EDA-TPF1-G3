@@ -69,22 +69,18 @@ void Model::getMerkleTree() {
 			tree.tree.push_back(newID);
 		}
 	}
-	do {
-
-	} while (nearestPowerOf2 / 2);
+	int maxLvl = (log(nearestPowerOf2) / log(2));		//Max level es el nivel del arbol menos el MerkleRoot
+	for (int i = maxLvl; i > 0; i --) {					//Itera por cada nivel del arbol menos el primero que ya esta normalizado
+		for (int j = 0; j < (nearestPowerOf2 / (i + 1)); j++) {
+			newIDstr ID1 = tree.tree[0];
+			newIDstr ID2 = tree.tree[0];
+		}
+	}
 	vector<newIDstr> aux;
 
 }
 
-Block Model::getBlock(void)
-{
-	if (!(blockChain.empty()))
-	{
-		return blockChain[curr];
-	}
-}
-
-unsigned int Model::getCurr(void){ return curr; }
+unsigned long int Model::getNumberOfBlocks(void) { return blockChain.size(); }
 
 /*******************************************************************************
  * FUNCTION DEFINITIONS WITH FILE LEVEL SCOPE
