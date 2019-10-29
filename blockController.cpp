@@ -31,8 +31,14 @@ void blockController::askBlock(string path) {
 
 void blockController::selectBlock(void) {
 	ImGui::Begin("Block Selection");
-	ImGui::Text("Se encontraron %u bloques en el archivo seleccionado", m->getNumberOfBlocks());
-	ImGui::Text("Seleccione el numero de bloque que desee abrir (Proximamente)");
+	if (m->getNumberOfBlocks() == 1)
+		ImGui::Text("Se encontro 1 bloque:");
+	else if (m->getNumberOfBlocks() == 0)
+		ImGui::Text("No se encontraron bloques");
+	else
+		ImGui::Text("Se encontraron %d bloques:", m->getNumberOfBlocks());
+
+	ImGui::Text("Seleccione el bloque que desee abrir");
 
 	ImGui::NewLine();
 
