@@ -7,10 +7,7 @@
 
 fileController::fileController(Model& model) {
 	m = &model;
-	filenames.push_back("file1");
-	filenames.push_back("file2");
-	filenames.push_back("file3");
-
+	open = -1;
 }
 
 void fileController::update(void* model) {
@@ -20,12 +17,17 @@ void fileController::update(void* model) {
 void fileController::cycle() {
 	askPath();
 
+	if (open >= 0) {
+		string aux = path;
+		aux += filenames[open];
+		m->openBlockChain(aux);
+	}
 
 }
 
 void fileController::askPath() {
 
-	ImGui::Begin("Window 1");
+	ImGui::Begin("Blockchain Files");
 	ImGui::Text("Por favor especifique la carpeta con los archivos que desea");
 	ImGui::Text("Recuerde que en Windows las carpetas se separan con \\");
 	ImGui::NewLine();
@@ -33,12 +35,18 @@ void fileController::askPath() {
 	ImGui::InputText("Path", path, _MAX_PATH);
 	ImGui::SameLine();
 	if (ImGui::Button("Submit")) {
-		//m->getFilenames(path, filenames);		//busca los .json en el path
+		filenames.clear();
+		vector<string>* p = m->getBlockChainNames(path);		//busca los .json en el path
+		for (int i = 0; i < p->size(); i++) {
+			filenames.push_back((*p)[i]);
+			open = -1;
+		}
+	}
+	ImGui::NewLine();
+	for (int i = 0; i < filenames.size(); i++) {
+		if (ImGui::Selectable(filenames[i].c_str()))
+			open = i;
 	}
 
-	for (int i = 0; i < filenames.size(); i++)
-		ImGui::Selectable(filenames[i].c_str());
-
 	ImGui::End();
-
 }
