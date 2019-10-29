@@ -2,7 +2,7 @@
 
 #include "imgui.h"
 
-treeWindow::treeWindow(const MerkelTree& t) :
+treeWindow::treeWindow(const MerkleTree& t) :
 	tree(t), open(true), validRoot(false)
 {
 	windowName = "Bloque ";
@@ -12,7 +12,7 @@ treeWindow::treeWindow(const MerkelTree& t) :
 
 }
 
-void treeWindow::replace(const MerkelTree& t)
+void treeWindow::replace(const MerkleTree& t)
 {
 	tree = t;
 

@@ -1,0 +1,48 @@
+[
+
+  {
+    "tx": [
+      {
+        "txid": "Gian",
+        "nTxin": 2,
+        "vin": [
+          {
+            "blockid": "Gian",
+            "txid": "AB"
+          }
+        ],
+        "nTxout": 2,
+        "vout": [
+          {
+            "publicid": "Gian",
+            "amount": 3
+          }
+        ]
+      },
+
+      {
+        "txid": "Alex",
+        "nTxin": 2,
+        "vin": [
+          {
+            "blockid": "Alex",
+            "txid": "CD"
+          }
+        ],
+        "nTxout": 2,
+        "vout": [
+          {
+            "publicid": "Alex",
+            "amount": 3
+          }
+        ]
+      }
+    ],
+    "height": 1,
+    "nonce": 151199,
+    "blockid": "Bloque1",
+    "previousblockid": "Bloque0",
+    "merkleroot": "ABCD",
+    "nTx": 2
+  }
+]

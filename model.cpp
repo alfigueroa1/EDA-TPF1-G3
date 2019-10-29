@@ -21,16 +21,12 @@ Model::~Model(void)
 
 }
 
-vector<string>* Model::getBlockChainNames(string path) {
-	return finder.getValidJSONs(path);
-}
+vector<string>* Model::getBlockChainNames(string path) { return finder.getValidJSONs(path); }
+vector<Block>::iterator Model::getCurr(void) { return curr; }
+unsigned long int Model::getNumberOfBlocks(void) { return blockChain.size(); }
 
-void Model::openBlockChain(string path) {
-	blockChain = finder.getBlockChain(path);
-}
-
-unsigned long int Model::getNumberOfBlocks() {
-	return blockChain.size();
+void Model::openBlockChain(string path) { 
+	finder.saveBlockChain(blockChain, path); 
 }
 
 void Model::openBlock(unsigned long int b) {
@@ -58,7 +54,7 @@ void Model::openBlock(unsigned long int b) {
 	else if (curr->nTx == 1) {
 		char aux[9];
 		unsigned int ID = generateID(curr->tx[0].txId.c_str());
-		sprintf(&aux[0], "%x", ID);
+		sprintf_s(&aux[0], 9, "%x", ID);
 		newIDstr newID(aux);
 		tree.tree.push_back(newID);
 		tree.merkleRoot = newID;
@@ -84,7 +80,7 @@ void Model::getMerkleTree() {
 	for (int i = 0; i < transactions; i++) {
 		char aux[9];
 		unsigned int ID = generateID(curr->tx[i].txId.c_str());
-		sprintf(&aux[0], "%x", ID);
+		sprintf_s(&aux[0],9, "%x", ID);
 		newIDstr newID(aux);
 		tree.tree.push_back(newID);
 	}
@@ -102,7 +98,7 @@ void Model::getMerkleTree() {
 	newIDstr concatenate = *(tree.tree.end()-2) + *(tree.tree.end()-1);		//Concatena un par de elementos del nivel anterior
 	char aux[9];
 	unsigned int ID = generateID(concatenate.c_str());
-	sprintf(&aux[0], "%x", ID);
+	sprintf_s(&aux[0],9, "%x", ID);
 	newIDstr newID(aux);
 	tree.tree.push_back(newID);
 	
@@ -117,7 +113,7 @@ void Model::fillLevel(int level, int* prevLvlAmount, vector<newIDstr>::iterator 
 		newIDstr concatenate = *(newIt + i) + *(newIt + i + 1);		//Concatena un par de elementos del nivel anterior
 		char aux[9];
 		unsigned int ID = generateID(concatenate.c_str());
-		sprintf(&aux[0], "%x", ID);
+		sprintf_s(&aux[0],9, "%x", ID);
 		newIDstr newID(aux);
 		lvl.push_back(newID);										//Se pushea la concatenacion al vector del nivel actual
 	}
@@ -132,9 +128,6 @@ void Model::fillLevel(int level, int* prevLvlAmount, vector<newIDstr>::iterator 
 	return;
 }
 
-unsigned long int Model::getNumberOfBlocks(void) { return blockChain.size(); }
-
-vector<Block>::iterator Model::getCurr(void){ return curr; }
 
 /*******************************************************************************
  * FUNCTION DEFINITIONS WITH FILE LEVEL SCOPE

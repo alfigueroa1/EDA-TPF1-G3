@@ -8,7 +8,7 @@ Viewer::Viewer() : windowList()
 void Viewer::update(void* m)
 {
 	Model* model = (Model*)m;
-	const MerkelTree* incoming = model->getOpenTree();
+	const MerkleTree* incoming = model->getOpenTree();
 	if (incoming == nullptr) {
 		//close all windows
 		windowList.clear();

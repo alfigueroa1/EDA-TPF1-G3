@@ -9,6 +9,12 @@
 
 using namespace boost::filesystem;
 
+/*******************************************************************************
+ * CONSTANT AND MACRO DEFINITIONS USING #DEFINE
+ ******************************************************************************/
+#define BLOCK_FIELDS 7
+#define TRANS_FIELDS 5
+#define V_FIELDS 2
 
 /*******************************************************************************
  * CASS METHODS DEFINITIONS
@@ -185,7 +191,7 @@ bool BlockChainFinder::isJsonAValidBlockChain(string path)
 		//Block
 		for (auto& blocks : j)	//Parsea todos los bloques
 		{
-			if (blocks.size() == 7) //Si son 7 elementos
+			if (blocks.size() == BLOCK_FIELDS) //Si son 7 elementos
 			{
 				blocks.at("height");
 				blocks.at("nonce");
@@ -200,7 +206,7 @@ bool BlockChainFinder::isJsonAValidBlockChain(string path)
 				auto arrayTrans = blocks["tx"];
 				for (auto& trans : arrayTrans)	//Parsea todas las transacciones
 				{
-					if (trans.size() == 5)	//Si son 5 elementos
+					if (trans.size() == TRANS_FIELDS)	//Si son 5 elementos
 					{
 						trans.at("txid");
 						trans.at("nTxin");
@@ -212,7 +218,7 @@ bool BlockChainFinder::isJsonAValidBlockChain(string path)
 						auto vOut = trans["vout"];
 						for (auto& elsi : vIn)
 						{
-							if (elsi.size() != 2)
+							if (elsi.size() != V_FIELDS)
 							{
 								ret = false;
 							}
@@ -226,7 +232,7 @@ bool BlockChainFinder::isJsonAValidBlockChain(string path)
 
 						for (auto& elso : vOut)
 						{
-							if (elso.size() != 2)
+							if (elso.size() != V_FIELDS)
 							{
 								ret = false;
 							}

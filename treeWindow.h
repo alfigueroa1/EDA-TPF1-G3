@@ -5,12 +5,12 @@
 class treeWindow
 {
 public:
-	treeWindow(const MerkelTree& tree);
-	void replace(const MerkelTree& tree);
+	treeWindow(const MerkleTree& tree);
+	void replace(const MerkleTree& tree);
 	void draw(void);
 	bool isOpen(void);
 private:
-	MerkelTree tree;
+	MerkleTree tree;
 	bool open;
 
 	string windowName;
