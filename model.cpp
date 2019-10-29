@@ -11,9 +11,9 @@ static unsigned int generateID(const char* str);
   * CLASS METHODS DEFINITIONS
   ******************************************************************************/
 
-Model::Model(void) : blockChain()
+Model::Model(void)
 {
-
+	blockChain.clear();
 }
 
 Model::~Model(void)
@@ -38,8 +38,9 @@ void Model::clearBlockChain()
 
 void Model::openBlockChain(string path) 
 {
+	blockChain.clear();
 	finder.saveBlockChain(blockChain, path);
-	notifyAllObservers();
+	//notifyAllObservers();
 }
 
 void Model::openBlock(unsigned long int b) {
@@ -81,7 +82,7 @@ void Model::openBlock(unsigned long int b) {
 }
 
 const MerkleTree* Model::getOpenTree() {
-	if (!blockChain.empty() && curr != blockChain.end()) {
+	if (curr != blockChain.end()) {
 		return &tree;
 	}
 	else
