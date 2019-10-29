@@ -66,7 +66,7 @@ string fileController::askPath() {
 	ImGui::NewLine();
 	for (int i = 0; i < filenames.size(); i++) {
 		if (ImGui::Selectable(filenames[i].c_str()))
-			aux = path + filenames[i];
+			aux = filenames[i];
 	}
 
 	ImGui::End();
@@ -100,6 +100,8 @@ void blockController::askBlock(string path) {
 	}
 	blocks += "\0";
 	ImGui::Combo("Bloques", &currBlock, blocks.c_str());
+	//Para que funcione
+	currBlock = 1;
 	openBlock(currBlock);
 
 	ImGui::End();
@@ -107,7 +109,7 @@ void blockController::askBlock(string path) {
 
 
 void blockController::openBlock(unsigned long int b) {
-	//m->openBlock();
+	m->openBlock(b);
 
 	ImGui::Begin("Block Selection");
 	ImGui::Text("Block ID: %d", m->getCurr()->blockId);

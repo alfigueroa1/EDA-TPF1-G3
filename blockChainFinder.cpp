@@ -78,7 +78,7 @@ bool BlockChainFinder::getJSONNames(string path)
 		}
 		else if (is_directory(path))	//De no serlo, es una carpeta?
 		{		
-			cout << "Is a directory" << endl;
+			//cout << "Is a directory" << endl;
 			for (directory_entry& x : directory_iterator(path))	//Recorre toda la carpeta, elemento a elemento.
 			{
 				fileExtension = extension(x.path());			//Obtiene la extension del archivo
