@@ -39,6 +39,7 @@ public:
 
 
 private:
+	bool selectedBlock;
 	void getMerkleTree();
 	void fillLevel(int level, int* nearestPow, vector<newIDstr>::iterator it);
 	BlockChainFinder finder;

@@ -4,14 +4,14 @@
     "tx": [
       {
         "txid": "Gian",
-        "nTxin": 2,
+        "nTxin": 1,
         "vin": [
           {
             "blockid": "Gian",
             "txid": "AB"
           }
         ],
-        "nTxout": 2,
+        "nTxout": 1,
         "vout": [
           {
             "publicid": "Gian",
@@ -22,14 +22,14 @@
 
       {
         "txid": "Alex",
-        "nTxin": 2,
+        "nTxin": 1,
         "vin": [
           {
             "blockid": "Alex",
             "txid": "CD"
           }
         ],
-        "nTxout": 2,
+        "nTxout": 1,
         "vout": [
           {
             "publicid": "Alex",
