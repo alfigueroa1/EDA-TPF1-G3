@@ -38,7 +38,7 @@ vector<string>* BlockChainFinder::getValidJSONs(string path)
 		//auto i = jsonNames.begin();
 		for (auto i = jsonNames.begin(); i != jsonNames.end(); i++) 
 		{
-			if (!isJsonAValidBlockChain(path))
+			if (!isJsonAValidBlockChain(*i))
 			{
 				jsonNames.erase(i--);									//Removes invalid json files (json not a valid blockchain)
 			}

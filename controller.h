@@ -1,30 +1,21 @@
 #pragma once
 
+#include "observer.h"
 #include "model.h"
+#include "fileController.h"
+#include "blockController.h"
 
-class fileController : public Observer {
+typedef enum { INIT, BLOCK, ERR } stateType;
+
+class controllerHandler {
 public:
-	fileController(Model&);
-	virtual void update(void*);
-	void cycle(void);
+	controllerHandler(Model&);
+	~controllerHandler();
+	void cycle();
 
 private:
-	Model* m;
-	char path[_MAX_PATH];
-	vector<string> filenames;
-	int open;
-	void askPath();
+	fileController* fc;
+	blockController* bc;
+	stateType state;
 };
 
-
-//class blockController : public Observer {
-//public:
-//	blockController(Model&);
-//	virtual void update(void*);
-//	void cycle(void);
-//
-//private:
-//	Model* m;
-//
-//
-//};

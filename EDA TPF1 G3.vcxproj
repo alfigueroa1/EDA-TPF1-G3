@@ -165,7 +165,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blockChain.h" />
+    <ClInclude Include="blockController.h" />
     <ClInclude Include="controller.h" />
+    <ClInclude Include="fileController.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imconfig_allegro5.h" />
     <ClInclude Include="imgui.h" />
