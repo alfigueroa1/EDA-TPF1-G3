@@ -38,7 +38,7 @@ vector<string>* BlockChainFinder::getValidJSONs(string path)
 		//auto i = jsonNames.begin();
 		for (auto i = jsonNames.begin(); i != jsonNames.end(); i++) 
 		{
-			if (!isJsonAValidBlockChain(*i))
+			if (/*!isJsonAValidBlockChain(*i)*/true)
 			{
 				jsonNames.erase(i--);									//Removes invalid json files (json not a valid blockchain)
 			}
@@ -153,12 +153,17 @@ void BlockChainFinder::saveBlockChain(BlockChain& blockchain, string path)
 			auxTrans.nTxIn = nTxIn;
 
 			auto vIn = trans["vin"];
-			for (auto& elsi : vIn){
+			for (auto& elsi : vIn)
+			{
+				Vin auxVin;
+
 				auto tBlockId = elsi["blockid"];
-				auxTrans.vIn.blockId = tBlockId.get<string>();
+				auxVin.blockId = tBlockId.get<string>();
 
 				auto tTxId = elsi["txid"];
-				auxTrans.vIn.txId = tTxId.get<string>();
+				auxVin.txId = tTxId.get<string>();
+
+				auxTrans.vIn.push_back(auxVin);
 			}
 
 			auto nTxOut = trans["nTxout"];
@@ -167,11 +172,15 @@ void BlockChainFinder::saveBlockChain(BlockChain& blockchain, string path)
 			auto vOut = trans["vout"];
 			for (auto& elso : vOut)
 			{
+				Vout auxVout;
+
 				auto publicId = elso["publicid"];
-				auxTrans.vOut.publicId = publicId.get<string>();
+				auxVout.publicId = publicId.get<string>();
 
 				auto amount = elso["amount"];
-				auxTrans.vOut.amount = amount;
+				auxVout.amount = amount;
+
+				auxTrans.vOut.push_back(auxVout);
 			}
 
 			block.tx.push_back(auxTrans);

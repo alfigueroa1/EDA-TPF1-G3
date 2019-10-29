@@ -61,7 +61,7 @@ void Model::openBlock(unsigned long int b) {
 	else if (curr->nTx == 1) {
 		char aux[9];
 		unsigned int ID = generateID(curr->tx[0].txId.c_str());
-		sprintf_s(&aux[0], 9, "%x", ID);
+		sprintf_s(&aux[0], 9, "%08X", ID);
 		newIDstr newID(aux);
 		tree.tree.clear();
 		tree.tree.push_back(newID);
@@ -88,11 +88,17 @@ void Model::getMerkleTree() {
 	//Normalize floor of tree
 	//Not filling floor
 	for (int i = 0; i < transactions; i++) {
+		//tree.tree.push_back(curr->tx[i].vIn.txId);
+		unsigned long int inTrans = curr->tx[i].nTxIn;
+		string concatenate;
+		concatenate.clear();
+		for (int j = 0; j < inTrans; j++)
+			concatenate += curr->tx[i].vIn[j].txId;
 		char aux[9];
-		unsigned int ID = generateID(curr->tx[i].txId.c_str());
-		sprintf_s(&aux[0],9, "%x", ID);
-		newIDstr newID(aux);
-		tree.tree.push_back(newID);
+		unsigned int ID = generateID(concatenate.c_str());
+		sprintf_s(&aux[0], 9, "%08X", ID);
+		newIDstr leafID(aux);
+		tree.tree.push_back(leafID);
 	}
 	int prevLvlAmount = transactions;
 	if (transactions % 2) {
@@ -108,15 +114,15 @@ void Model::getMerkleTree() {
 	newIDstr concatenate = *(tree.tree.end()-2) + *(tree.tree.end()-1);		//Concatena un par de elementos del nivel anterior
 	char aux[9];
 	unsigned int ID = generateID(concatenate.c_str());
-	sprintf_s(&aux[0],9, "%x", ID);
+	sprintf_s(&aux[0],9, "%08X", ID);
 	newIDstr newID(aux);
 	tree.tree.push_back(newID);
 
-	char root[9];
-	ID = generateID(curr->merkleRoot.c_str());
-	sprintf_s(&root[0], 9, "%x", ID);
-	newIDstr rootStr(root);
-	tree.merkleRoot = rootStr;
+	//char root[9];
+	//ID = generateID(curr->merkleRoot.c_str());
+	//sprintf_s(&root[0], 9, "%08X", ID);
+	//newIDstr rootStr(root);
+	tree.merkleRoot = curr->merkleRoot;
 }
 
 void Model::fillLevel(int level, int* prevLvlAmount, vector<newIDstr>::iterator it) {		//Fill level asume que el nivel anterior esta completo y lindo
@@ -128,7 +134,7 @@ void Model::fillLevel(int level, int* prevLvlAmount, vector<newIDstr>::iterator 
 		newIDstr concatenate = *(newIt + i) + *(newIt + i + 1);		//Concatena un par de elementos del nivel anterior
 		char aux[9];
 		unsigned int ID = generateID(concatenate.c_str());
-		sprintf_s(&aux[0],9, "%x", ID);
+		sprintf_s(&aux[0],9, "%08X", ID);
 		newIDstr newID(aux);
 		lvl.push_back(newID);										//Se pushea la concatenacion al vector del nivel actual
 	}
