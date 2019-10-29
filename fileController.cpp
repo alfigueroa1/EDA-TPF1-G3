@@ -29,9 +29,16 @@ string fileController::askPath() {
 	if (ImGui::Button("Submit")) {
 		filenames.clear();
 		vector<string>* p = m->getBlockChainNames(path);		//busca los .json en el path
-		if (p != NULL)
+		if (p != NULL) {
 			for (int i = 0; i < p->size(); i++)
 				filenames.push_back((*p)[i]);
+			if (filenames.size() == 1)
+				ImGui::Text("Se encontro 1 archivo:");
+			else if (filenames.size() == 0)
+				ImGui::Text("No se encontraron archivos");
+			else
+				ImGui::Text("Se encontraron %d archivos:", filenames.size());
+		}
 	}
 
 	ImGui::NewLine();
