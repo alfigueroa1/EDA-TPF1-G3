@@ -36,6 +36,7 @@ void controllerHandler::cycle() {
 //FILE CONTROLLER
 fileController::fileController(Model& model) {
 	m = &model;
+	selected = -1;
 }
 
 
@@ -66,10 +67,13 @@ string fileController::askPath() {
 	ImGui::NewLine();
 	for (int i = 0; i < filenames.size(); i++) {
 		if (ImGui::Selectable(filenames[i].c_str()))
-			aux = filenames[i];
+			selected = i;
 	}
 
 	ImGui::End();
+
+	if(selected != -1)
+		aux = filenames[selected];
 
 	return aux;
 }
@@ -78,7 +82,8 @@ string fileController::askPath() {
 //BLOCK CONTROLLER
 blockController::blockController(Model& model) {
 	m = &model;
-
+	currBlock = 0;
+	merkle = false;
 }
 
 void blockController::update(void* model) {
@@ -88,7 +93,7 @@ void blockController::update(void* model) {
 void blockController::askBlock(string path) {
 	ImGui::Begin("Block Selection");
 	m->openBlockChain(path);
-	ImGui::Text("Se encontraron %d bloques en el archivo seleccionado", m->getNumberOfBlocks());
+	ImGui::Text("Se encontraron %u bloques en el archivo seleccionado", m->getNumberOfBlocks());
 	ImGui::Text("Seleccione el número de bloque que desee abrir");
 
 
@@ -100,9 +105,9 @@ void blockController::askBlock(string path) {
 	}
 	blocks += "\0";
 	ImGui::Combo("Bloques", &currBlock, blocks.c_str());
-	//Para que funcione
-	currBlock = 1;
-	openBlock(currBlock);
+
+	if(currBlock != -1)
+		openBlock(currBlock + 1);
 
 	ImGui::End();
 }
@@ -111,17 +116,17 @@ void blockController::askBlock(string path) {
 void blockController::openBlock(unsigned long int b) {
 	m->openBlock(b);
 
-	ImGui::Begin("Block Selection");
-	ImGui::Text("Block ID: %d", m->getCurr()->blockId);
-	ImGui::Text("Previous Block ID: %d", m->getCurr()->previousBlockId);
-	ImGui::Text("Cantidad de transacciones: %d", m->getCurr()->nTx);
-	ImGui::Text("Nonce: %d", m->getCurr()->nonce);
+	//ImGui::Begin("Block Selection");
+	ImGui::Text("Block ID: %u", m->getCurr()->blockId);
+	ImGui::Text("Previous Block ID: %u", m->getCurr()->previousBlockId);
+	ImGui::Text("Cantidad de transacciones: %u", m->getCurr()->nTx);
+	ImGui::Text("Nonce: %u", m->getCurr()->nonce);
 
 	if (ImGui::Button("Calculate Merkle Root"))
 		merkle = !merkle;
 
 	if (merkle) {
-		ImGui::Text("Merkle Root: %d", m->getCurr()->merkleRoot);
+		ImGui::Text("Merkle Root: %u", m->getCurr()->merkleRoot);
 		ImGui::SameLine();
 		if (ImGui::Button("Check Merkle Root")) {
 			//if(m->checkMerkleRoot())
@@ -130,10 +135,10 @@ void blockController::openBlock(unsigned long int b) {
 		}
 	}
 
-	if (ImGui::Button("Show Merkle Tree"))
+	if (ImGui::Button("Show Merkle Tree"));
 		//m->showOpenTree();
 
-	ImGui::End();
+	//ImGui::End();
 }
 
 
