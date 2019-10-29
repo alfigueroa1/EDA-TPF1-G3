@@ -13,5 +13,4 @@ private:
 	Model* m;
 	char path[_MAX_PATH];
 	vector<string> filenames;
-	int selected;
 };

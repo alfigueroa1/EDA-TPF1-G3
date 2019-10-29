@@ -12,7 +12,6 @@ public:
 private:
 	Model* m;
 	int currBlock;
-	char* preview;
-	char* blocks[100];
+	string blocks;
 	//void openBlock(unsigned long int);
 };
