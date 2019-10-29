@@ -124,10 +124,6 @@ void Model::getMerkleTree() {
 	newIDstr newID(aux);
 	tree.tree.push_back(newID);
 
-	//char root[9];
-	//ID = generateID(curr->merkleRoot.c_str());
-	//sprintf_s(&root[0], 9, "%08X", ID);
-	//newIDstr rootStr(root);
 	tree.merkleRoot = curr->merkleRoot;
 }
 
@@ -145,9 +141,9 @@ void Model::fillLevel(int level, int* prevLvlAmount, vector<newIDstr>::iterator 
 		lvl.push_back(newID);										//Se pushea la concatenacion al vector del nivel actual
 	}
 	*prevLvlAmount /= 2;											//Ahora el nivel actual tiene la mitad de elementos que el anterior
-	if (*prevLvlAmount % 2) {										//Si el nivel actual tiene elementos impares
+	if ((*prevLvlAmount) % 2) {										//Si el nivel actual tiene elementos impares
 		lvl.push_back(*(lvl.end()-1));								//Se copia el ultimo elemento
-		*prevLvlAmount++;											//El nivel actual queda con elementos pares
+		(*prevLvlAmount)++;											//El nivel actual queda con elementos pares
 	}
 	for (auto i = lvl.begin(); i != lvl.end(); i++) {
 		tree.tree.push_back(*i);									//Se pushea todo el nivel al arbol
