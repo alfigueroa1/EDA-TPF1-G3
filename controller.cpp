@@ -82,7 +82,7 @@ string fileController::askPath() {
 //BLOCK CONTROLLER
 blockController::blockController(Model& model) {
 	m = &model;
-	currBlock = 0;
+	currBlock = -1;
 	merkle = false;
 }
 
@@ -93,17 +93,18 @@ void blockController::update(void* model) {
 void blockController::askBlock(string path) {
 	ImGui::Begin("Block Selection");
 	m->openBlockChain(path);
-	ImGui::Text("Se encontraron %u bloques en el archivo seleccionado", m->getNumberOfBlocks());
-	ImGui::Text("Seleccione el número de bloque que desee abrir");
+	ImGui::Text("Se encontraron %u bloques en el archivo seleccionado", /*m->getNumberOfBlocks()*/2);
+	ImGui::Text("Seleccione el numero de bloque que desee abrir");
 
 
 	ImGui::NewLine();
-	string blocks;
-	for (int i = 0; i < m->getNumberOfBlocks(); i++) {
-		blocks += i;
-		blocks += "\0";
+	string blocks = "";
+	for (int i = 1; i <= /*m->getNumberOfBlocks()*/2; i++) {
+
+		blocks += "Block" + to_string(i);
+		blocks += '\0';
 	}
-	blocks += "\0";
+	blocks += '\0';
 	ImGui::Combo("Bloques", &currBlock, blocks.c_str());
 
 	if(currBlock != -1)

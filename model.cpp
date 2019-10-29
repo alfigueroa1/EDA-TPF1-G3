@@ -21,12 +21,19 @@ Model::~Model(void)
 
 }
 
-vector<string>* Model::getBlockChainNames(string path) { return finder.getValidJSONs(path); }
 vector<Block>::iterator Model::getCurr(void) { return curr; }
 unsigned long int Model::getNumberOfBlocks(void) { return blockChain.size(); }
 
-void Model::openBlockChain(string path) { 
-	finder.saveBlockChain(blockChain, path); 
+vector<string>* Model::getBlockChainNames(string path) 
+{ 
+	//notifyAllObservers();
+	return finder.getValidJSONs(path); 
+}
+
+void Model::openBlockChain(string path) 
+{
+	finder.saveBlockChain(blockChain, path);
+	//notifyAllObservers();
 }
 
 void Model::openBlock(unsigned long int b) {
@@ -62,6 +69,8 @@ void Model::openBlock(unsigned long int b) {
 	else {
 		getMerkleTree();
 	}
+
+	notifyAllObservers();
 }
 
 const MerkleTree* Model::getOpenTree() {
