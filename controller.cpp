@@ -13,6 +13,10 @@ fileController::fileController(Model& model) {
 
 }
 
+void fileController::update(void* model) {
+	m = (Model*)model;
+}
+
 void fileController::cycle() {
 	askPath();
 

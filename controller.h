@@ -5,8 +5,8 @@
 class fileController : public Observer {
 public:
 	fileController(Model&);
-	virtual void update(void*){}
-	void cycle(void){}
+	virtual void update(void*);
+	void cycle(void);
 
 private:
 	Model* m;
