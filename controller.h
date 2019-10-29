@@ -5,7 +5,7 @@
 #include "fileController.h"
 #include "blockController.h"
 
-typedef enum { INIT, BLOCK, ERR } stateType;
+typedef enum { INIT, GET_BLOCK, SHOW_BLOCK, ERR } stateType;
 
 class controllerHandler {
 public:
