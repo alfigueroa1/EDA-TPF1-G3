@@ -10,23 +10,28 @@ using namespace std;
 /*******************************************************************************
  * ENUMERATIONS AND STRUCTURES AND TYPEDEFS
  *****************************************************************************/
-struct Transaction 
+struct Vin
+{
+	string blockId;
+	string txId;
+
+};
+
+struct Vout
+{
+	string publicId;
+	unsigned long int amount;
+
+};
+
+struct Transaction
 {
 	string txId;
 	unsigned long int nTxIn;
-	struct vIn 
-	{
-		string blockId;
-		string txId;
-
-	} vIn;
+	vector<Vin> vIn;
 	unsigned long int nTxOut;
-	struct vOut 
-	{
-		string publicId;
-		unsigned long int amount;
+	vector<Vout> vOut;
 
-	} vOut;
 };
 
 struct Block 
