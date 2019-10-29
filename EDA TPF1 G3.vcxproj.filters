@@ -107,6 +107,12 @@
     <ClInclude Include="treeWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="fileController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="blockController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

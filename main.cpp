@@ -32,10 +32,9 @@ void alexTesteaImGui(void) {
 	ImVec4 backColor = ImVec4(0.f, 0.75f, 0.75f, 1.f);
 
 	Model m;
-	fileController c(m);
+	controllerHandler c(m);
 	Viewer v;
 
-	m.attach(c);
 	m.attach(v);
 
 	bool running = true;
