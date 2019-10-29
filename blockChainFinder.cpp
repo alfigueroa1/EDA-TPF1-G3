@@ -38,7 +38,7 @@ vector<string>* BlockChainFinder::getValidJSONs(string path)
 		//auto i = jsonNames.begin();
 		for (auto i = jsonNames.begin(); i != jsonNames.end(); i++) 
 		{
-			if (!isJsonAValidBlockChain(path))
+			if (!isJsonAValidBlockChain(*i))
 			{
 				jsonNames.erase(i--);									//Removes invalid json files (json not a valid blockchain)
 			}
@@ -62,18 +62,22 @@ vector<string>* BlockChainFinder::getValidJSONs(string path)
 	}
 }
 
-bool BlockChainFinder::getJSONNames(string path) {
-	string fileExtension;
+bool BlockChainFinder::getJSONNames(string path) 
+{
 	bool ret = true;
 	error = NO_BLOCK_ERROR;
 	jsonNames.clear();
 
-	if (exists(path))    // Existe el path?
+	string fileExtension;
+
+	if (exists(path))	//Existe el path?
 	{
-		if (is_regular_file(path)) {        // El path es un archivo?
+		if (is_regular_file(path))	// El path es un archivo?
+		{        
 			cout << path << " size is " << file_size(path) << '\n';	//DEBUGGING
 		}
-		else if (is_directory(path)) {		// de no serlo, es una carpeta?
+		else if (is_directory(path))	//De no serlo, es una carpeta?
+		{		
 			cout << "Is a directory" << endl;
 			for (directory_entry& x : directory_iterator(path))	//Recorre toda la carpeta, elemento a elemento.
 			{
