@@ -31,8 +31,14 @@ public:
 	const MerkleTree* getOpenTree(); //Devuelve la estructura del ultimo tree abierto (consecuencia de openBlock)
 	//bool replaceLastTree(); //En caso de utilizar, en la ventana 2, teclas "Previous"/"Next", sera necesario una variable q valga FALSE si se llamo por ultima vez a openBlock, o TRUE, si se llamo a una hipotetica funcion openNext/openPrev
 
+
+	//Y estas no se para q sirven... tengo la impresion de q son privadas. No las hice yo. Favor de comunicarse con Alex
+	vector<Block>::iterator getCurr(void);
+
+
 private:
 	void getMerkleTree();
+	void fillLevel(int level, int* nearestPow, vector<newIDstr>::iterator it);
 	BlockChainFinder finder;
 	BlockChain blockChain;
 	MerkleTree tree;

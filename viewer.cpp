@@ -8,7 +8,7 @@ Viewer::Viewer() : windowList()
 void Viewer::update(void* m)
 {
 	Model* model = (Model*)m;
-	const MerkelTree* incoming = model->getOpenTree();
+	const MerkleTree* incoming = model->getOpenTree();
 	if (incoming == nullptr) {
 		//close all windows
 		windowList.clear();
@@ -17,7 +17,7 @@ void Viewer::update(void* m)
 		map<longN, treeWindow>::iterator it;
 		if ((it = windowList.find(incoming->height)) == windowList.end())
 		{
-			windowList.emplace(incoming->height,*incoming);
+			windowList.emplace(incoming->height, *incoming);
 			//agregar ventana
 		}
 		else
@@ -32,10 +32,10 @@ void Viewer::cycle(void)
 {
 	if (windowList.empty() == false) {
 
-		map<longN,treeWindow>::iterator closing, it; //auto no me salvo de esta
+		map<longN, treeWindow>::iterator closing, it; //auto no me salvo de esta
 		bool closeWindow = false;
 
-		for (it = windowList.begin(); it != windowList.end();it++) {
+		for (it = windowList.begin(); it != windowList.end(); it++) {
 			it->second.draw();
 			if (it->second.isOpen() == false) {
 				closeWindow = true;

@@ -151,7 +151,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="blockChain.cpp" />
     <ClCompile Include="blockChainFinder.cpp" />
     <ClCompile Include="controller.cpp" />
     <ClCompile Include="imgui.cpp" />
