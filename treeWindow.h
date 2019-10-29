@@ -19,6 +19,6 @@ private:
 	void validateRoot(void);
 
 	void drawTree(void);
-	void drawFloor(const longN totalHeight, const longN floor,const longN leafs, vector<newIDstr>::iterator& i);
+	void drawFloor(const longN totalHeight, const longN floor,const longN uniques, vector<newIDstr>::iterator& i);
 };
 
