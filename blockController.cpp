@@ -21,7 +21,7 @@ void blockController::askBlock(string path) {
 	//m->clearBlockChain();
 	m->openBlockChain(path);
 
-	for (int i = 1; i <= m->getNumberOfBlocks(); i++) {
+	for (int i = 0; i < m->getNumberOfBlocks(); i++) {
 
 		blocks += "Block" + to_string(i);
 		blocks += '\0';
@@ -37,7 +37,7 @@ void blockController::selectBlock(void) {
 	ImGui::NewLine();
 
 	if (ImGui::Combo("Bloques", &currBlock, blocks.c_str()))
-		m->openBlock(currBlock + 1);
+		m->openBlock(currBlock);
 
 	ImGui::End();
 }

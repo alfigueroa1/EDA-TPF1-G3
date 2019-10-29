@@ -38,7 +38,7 @@ vector<string>* BlockChainFinder::getValidJSONs(string path)
 		//auto i = jsonNames.begin();
 		for (auto i = jsonNames.begin(); i != jsonNames.end(); i++) 
 		{
-			if (/*!isJsonAValidBlockChain(*i)*/true)
+			if (!isJsonAValidBlockChain(*i))
 			{
 				jsonNames.erase(i--);									//Removes invalid json files (json not a valid blockchain)
 			}
@@ -231,32 +231,17 @@ bool BlockChainFinder::isJsonAValidBlockChain(string path)
 						auto vOut = trans["vout"];
 						for (auto& elsi : vIn)
 						{
-							if (elsi.size() != V_FIELDS)
-							{
-								ret = false;
-							}
-							else
-							{
-								elsi.at("blockid");
-								elsi.at("txid");
-								ret = true;
-							}
+							elsi.at("blockid");
+							elsi.at("txid");
 						}
 
 						for (auto& elso : vOut)
 						{
-							if (elso.size() != V_FIELDS)
-							{
-								ret = false;
-							}
-							else
-							{
-								elso.at("publicid");
-								elso.at("amount");
-
-								ret = true;
-							}
+							elso.at("publicid");
+							elso.at("amount");
 						}
+
+						ret = true;
 					}
 				}
 			}
