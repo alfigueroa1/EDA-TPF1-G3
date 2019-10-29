@@ -25,18 +25,22 @@ controllerHandler::~controllerHandler() {
 void controllerHandler::cycle() {
 	string filename;
 	if ((filename = fc->askPath()) != " ")
-		state = BLOCK;
+		state = GET_BLOCK;
 
-	if (state == BLOCK)
+	if (state == GET_BLOCK) {
 		bc->askBlock(filename);
+		state = SHOW_BLOCK;
+	}
 
+	if (state == SHOW_BLOCK)
+		bc->selectBlock();
 }
 
 
 //FILE CONTROLLER
 fileController::fileController(Model& model) {
 	m = &model;
-	selected = -1;
+	//selected = -1;
 }
 
 
@@ -67,13 +71,13 @@ string fileController::askPath() {
 	ImGui::NewLine();
 	for (int i = 0; i < filenames.size(); i++) {
 		if (ImGui::Selectable(filenames[i].c_str()))
-			selected = i;
+			aux = filenames[i];
+			//selected = i;
 	}
 
 	ImGui::End();
 
-	if(selected != -1)
-		aux = filenames[selected];
+	//if(selected != -1)
 
 	return aux;
 }
@@ -82,8 +86,8 @@ string fileController::askPath() {
 //BLOCK CONTROLLER
 blockController::blockController(Model& model) {
 	m = &model;
-	currBlock = 0;
-	merkle = false;
+	currBlock = 1;
+	//merkle = false;
 }
 
 void blockController::update(void* model) {
@@ -91,55 +95,72 @@ void blockController::update(void* model) {
 }
 
 void blockController::askBlock(string path) {
-	ImGui::Begin("Block Selection");
 	m->openBlockChain(path);
-	ImGui::Text("Se encontraron %u bloques en el archivo seleccionado", m->getNumberOfBlocks());
-	ImGui::Text("Seleccione el número de bloque que desee abrir");
+	char num[11];
 
-
-	ImGui::NewLine();
-	string blocks;
 	for (int i = 0; i < m->getNumberOfBlocks(); i++) {
-		blocks += i;
-		blocks += "\0";
+		sprintf_s(num, 11, "Bloque %d", i);
+		blocks[i] = num;
 	}
-	blocks += "\0";
-	ImGui::Combo("Bloques", &currBlock, blocks.c_str());
+
+}
+
+void blockController::selectBlock(void) {
+	ImGui::Begin("Block Selection");
+	ImGui::Text("Se encontraron %u bloques en el archivo seleccionado", m->getNumberOfBlocks());
+	ImGui::Text("Seleccione el numero de bloque que desee abrir (Proximamente)");
+	
+	ImGui::NewLine();
+
+	preview = blocks[currBlock];
+
+	if (ImGui::BeginCombo("Bloques", preview)) // The second parameter is the label previewed before opening the combo.
+	{
+		for (int n = 0; n < m->getNumberOfBlocks(); n++)
+		{
+			bool is_selected = (preview == blocks[n]);
+			if (ImGui::Selectable(blocks[n], is_selected))
+				preview = blocks[n];
+			if (is_selected)
+				ImGui::SetItemDefaultFocus();   // Set the initial focus when opening the combo (scrolling + for keyboard navigation support in the upcoming navigation branch)
+		}
+		ImGui::EndCombo();
+	}
 
 	if(currBlock != -1)
-		openBlock(currBlock + 1);
+		m->openBlock(currBlock + 1);
 
 	ImGui::End();
 }
 
 
-void blockController::openBlock(unsigned long int b) {
-	m->openBlock(b);
-
-	//ImGui::Begin("Block Selection");
-	ImGui::Text("Block ID: %u", m->getCurr()->blockId);
-	ImGui::Text("Previous Block ID: %u", m->getCurr()->previousBlockId);
-	ImGui::Text("Cantidad de transacciones: %u", m->getCurr()->nTx);
-	ImGui::Text("Nonce: %u", m->getCurr()->nonce);
-
-	if (ImGui::Button("Calculate Merkle Root"))
-		merkle = !merkle;
-
-	if (merkle) {
-		ImGui::Text("Merkle Root: %u", m->getCurr()->merkleRoot);
-		ImGui::SameLine();
-		if (ImGui::Button("Check Merkle Root")) {
-			//if(m->checkMerkleRoot())
-			ImGui::SameLine();
-			ImGui::Text("Valid");
-		}
-	}
-
-	if (ImGui::Button("Show Merkle Tree"));
-		//m->showOpenTree();
-
-	//ImGui::End();
-}
+//void blockController::openBlock(unsigned long int b) {
+//	m->openBlock(b);
+//
+//	//ImGui::Begin("Block Selection");
+//	ImGui::Text("Block ID: %u", m->getCurr()->blockId);
+//	ImGui::Text("Previous Block ID: %u", m->getCurr()->previousBlockId);
+//	ImGui::Text("Cantidad de transacciones: %u", m->getCurr()->nTx);
+//	ImGui::Text("Nonce: %u", m->getCurr()->nonce);
+//
+//	if (ImGui::Button("Calculate Merkle Root"))
+//		merkle = !merkle;
+//
+//	if (merkle) {
+//		ImGui::Text("Merkle Root: %u", m->getCurr()->merkleRoot);
+//		ImGui::SameLine();
+//		if (ImGui::Button("Check Merkle Root")) {
+//			//if(m->checkMerkleRoot())
+//			ImGui::SameLine();
+//			ImGui::Text("Valid");
+//		}
+//	}
+//
+//	if (ImGui::Button("Show Merkle Tree"));
+//		//m->showOpenTree();
+//
+//	//ImGui::End();
+//}
 
 
 

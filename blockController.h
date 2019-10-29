@@ -7,10 +7,12 @@ public:
 	blockController(Model&);
 	virtual void update(void*);
 	void askBlock(string);
+	void selectBlock();
 
 private:
 	Model* m;
 	int currBlock;
-	bool merkle;
-	void openBlock(unsigned long int);
+	char* preview;
+	char* blocks[100];
+	//void openBlock(unsigned long int);
 };
