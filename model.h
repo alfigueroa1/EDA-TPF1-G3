@@ -33,12 +33,12 @@ public:
 
 
 	//Y estas no se para q sirven... tengo la impresion de q son privadas. No las hice yo. Favor de comunicarse con Alex
-	Block getBlock(void);
-	unsigned int getCurr(void);
+	vector<Block>::iterator getCurr(void);
 
 
 private:
 	void getMerkleTree();
+	void fillLevel(int level, int* nearestPow, vector<newIDstr>::iterator it);
 	BlockChainFinder finder;
 	BlockChain blockChain;
 	MerkleTree tree;
