@@ -210,7 +210,7 @@ bool BlockChainFinder::isJsonAValidBlockChain(string path)
 				blocks.at("blockid");	//Se fija que sean los correspondientes
 				blocks.at("previousblockid");
 				blocks.at("merkleroot");
-				blocks.at("nTx");
+				int ntx = blocks.at("nTx");
 				blocks.at("height");
 				blocks.at("tx");
 
@@ -218,29 +218,32 @@ bool BlockChainFinder::isJsonAValidBlockChain(string path)
 				auto arrayTrans = blocks["tx"];
 				for (auto& trans : arrayTrans)	//Parsea todas las transacciones
 				{
-					if (trans.size() == TRANS_FIELDS)	//Si son 5 elementos
+					if (arrayTrans.size() == ntx && trans.size() == TRANS_FIELDS)	//Si son 5 elementos
 					{
 						trans.at("txid");
-						trans.at("nTxin");
+						int txin = trans.at("nTxin");
 						trans.at("vin");	//Se fija que sean los correctos
-						trans.at("nTxout");
+						int txout = trans.at("nTxout");
 						trans.at("vout");
 
 						auto vIn = trans["vin"];
 						auto vOut = trans["vout"];
-						for (auto& elsi : vIn)
+						if (vIn.size() == txin && vOut.size() == txout)
 						{
-							elsi.at("blockid");
-							elsi.at("txid");
-						}
+							for (auto& elsi : vIn)
+							{
+								elsi.at("blockid");
+								elsi.at("txid");
+							}
 
-						for (auto& elso : vOut)
-						{
-							elso.at("publicid");
-							elso.at("amount");
-						}
+							for (auto& elso : vOut)
+							{
+								elso.at("publicid");
+								elso.at("amount");
+							}
 
-						ret = true;
+							ret = true;
+						}
 					}
 				}
 			}
