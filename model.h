@@ -35,6 +35,8 @@ public:
 	//Y estas no se para q sirven... tengo la impresion de q son privadas. No las hice yo. Favor de comunicarse con Alex
 	vector<Block>::iterator getCurr(void);
 
+	void clearBlockChain();
+
 
 private:
 	void getMerkleTree();

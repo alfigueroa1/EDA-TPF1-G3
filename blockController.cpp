@@ -17,8 +17,10 @@ void blockController::update(void* model) {
 	m = (Model*)model;
 }
 
-void blockController::askBlock(string path) {
-	//m->clearBlockChain();
+void blockController::askBlock(string path) 
+{
+	blocks.clear();
+	m->clearBlockChain();
 	m->openBlockChain(path);
 
 	for (int i = 0; i < m->getNumberOfBlocks(); i++) {
@@ -29,8 +31,9 @@ void blockController::askBlock(string path) {
 	blocks += '\0';
 }
 
-void blockController::selectBlock(void) {
+void blockController::selectBlock(string filename) {
 	ImGui::Begin("Block Selection");
+	ImGui::Text("Archivo: %s", filename.c_str());
 	if (m->getNumberOfBlocks() == 1)
 		ImGui::Text("Se encontro 1 bloque:");
 	else if (m->getNumberOfBlocks() == 0)

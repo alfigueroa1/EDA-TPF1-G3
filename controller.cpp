@@ -14,7 +14,7 @@ controllerHandler::controllerHandler(Model& model) {
 	model.attach(*fc);
 	bc = new blockController(model);
 	model.attach(*bc);
-
+	filepath = "";
 }
 
 controllerHandler::~controllerHandler() {
@@ -23,19 +23,28 @@ controllerHandler::~controllerHandler() {
 }
 
 void controllerHandler::cycle() {
-	string filename;
-	if ((filename = fc->askPath()) != "")
+	string aux;
+	if ((aux = fc->askPath()) != "") {
 		state = GET_BLOCK;
-
+		filepath = aux;
+	}
+	
 	if (state == GET_BLOCK) {
-		bc->askBlock(filename);
+		bc->askBlock(filepath);
 		state = SHOW_BLOCK;
 	}
 
 	if (state == SHOW_BLOCK)
-		bc->selectBlock();
+		bc->selectBlock(getFilename(filepath));
 }
 
+string controllerHandler::getFilename(string filepath) 
+{
+	int place = filepath.find_last_of('/');
+	filepath.erase(0,place+1);
+	return filepath;
+
+}
 
 
 

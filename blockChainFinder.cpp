@@ -14,7 +14,6 @@ using namespace boost::filesystem;
  ******************************************************************************/
 #define BLOCK_FIELDS 7
 #define TRANS_FIELDS 5
-#define V_FIELDS 2
 
 /*******************************************************************************
  * CASS METHODS DEFINITIONS

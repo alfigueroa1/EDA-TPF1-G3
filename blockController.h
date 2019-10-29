@@ -7,7 +7,7 @@ public:
 	blockController(Model&);
 	virtual void update(void*);
 	void askBlock(string);
-	void selectBlock();
+	void selectBlock(string);
 
 private:
 	Model* m;

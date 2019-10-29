@@ -30,6 +30,12 @@ vector<string>* Model::getBlockChainNames(string path)
 	return finder.getValidJSONs(path); 
 }
 
+void Model::clearBlockChain()
+{
+	blockChain.clear();
+}
+
+
 void Model::openBlockChain(string path) 
 {
 	finder.saveBlockChain(blockChain, path);

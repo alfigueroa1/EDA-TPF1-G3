@@ -17,5 +17,7 @@ private:
 	fileController* fc;
 	blockController* bc;
 	stateType state;
+	string filepath;
+	string getFilename(string);
 };
 
