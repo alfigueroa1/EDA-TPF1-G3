@@ -3,7 +3,7 @@
 #include "imgui.h"
 #include "imgui_impl_allegro5.h"
 
-#include "controllerHandler.h"
+#include "controller.h"
 #include "model.h"
 #include "viewer.h"
 
@@ -29,7 +29,6 @@ int main(void) {
 	controllerHandler c(m);
 	Viewer v;
 
-	m.attach(c);
 	m.attach(v);
 
 	bool running = true;
