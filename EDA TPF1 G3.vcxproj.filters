@@ -45,9 +45,6 @@
     <ClCompile Include="viewer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="blockChainFinder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -58,6 +55,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="fileController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="controllerHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,6 +117,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="blockController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controllerHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -30,12 +30,14 @@ vector<Block>::iterator Model::resetCurr(void)
 vector<Block>::iterator Model::getCurr(void) { return curr; }
 unsigned long int Model::getNumberOfBlocks(void) { return blockChain.size(); }
 
-vector<string>* Model::getBlockChainNames(string path) 
-{ 
+
+vector<string>* Model::getBlockChainNames(string path)
+{
 	selectedBlock = false;
 	notifyAllObservers();
-	return finder.getValidJSONs(path); 
+	return finder.getValidJSONs(path);
 }
+
 
 void Model::clearBlockChain()
 {
@@ -43,8 +45,9 @@ void Model::clearBlockChain()
 }
 
 
-void Model::openBlockChain(string path) 
+void Model::openBlockChain(string _path)
 {
+	path = _path;
 	clearBlockChain();
 	finder.saveBlockChain(blockChain, path);
 	selectedBlock = false;

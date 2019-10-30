@@ -15,9 +15,14 @@ void fileController::update(void* model) {
 	m = (Model*)model;
 }
 
+void fileController::cycle() {
+	askPath();
+	string filename;
+	if ((filename = drawFiles()) != "")
+		m->setPath(filename);
+}
 
-string fileController::askPath() {
-	string aux = "";
+void fileController::askPath() {
 
 	ImGui::Begin("File Selector");
 	ImGui::Text("Por favor especifique la carpeta con los archivos que desea");
@@ -28,19 +33,30 @@ string fileController::askPath() {
 	ImGui::SameLine();
 	if (ImGui::Button("Submit")) {
 		filenames.clear();
-		vector<string>* p = m->getBlockChainNames(path);		//busca los .json en el path
-		if (p != NULL) {
-			for (int i = 0; i < p->size(); i++)
-				filenames.push_back((*p)[i]);
-			if (filenames.size() == 1)
-				ImGui::Text("Se encontro 1 archivo:");
-			else if (filenames.size() == 0)
-				ImGui::Text("No se encontraron archivos");
-			else
-				ImGui::Text("Se encontraron %d archivos:", filenames.size());
-		}
+		p = m->getBlockChainNames(path);		//busca los .json en el path
 	}
 
+	if (p != NULL) {
+		filenames.clear();
+		for (int i = 0; i < p->size(); i++)
+			filenames.push_back((*p)[i]);
+	}
+	//else
+		//ImGui::Text("El archivo no existe");
+	
+	if (filenames.size() == 1)
+		ImGui::Text("Se encontro 1 archivo:");
+	else if(filenames.size() > 0)
+		ImGui::Text("Se encontraron %d archivos:", filenames.size());
+
+	ImGui::End();
+}
+
+
+string fileController::drawFiles() {
+	string aux = "";
+
+	ImGui::Begin("File Selector");
 	ImGui::NewLine();
 	for (int i = 0; i < filenames.size(); i++) {
 		if (ImGui::Selectable(filenames[i].c_str()))
@@ -51,8 +67,6 @@ string fileController::askPath() {
 
 	return aux;
 }
-
-
 
 
 

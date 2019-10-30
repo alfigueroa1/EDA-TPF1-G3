@@ -34,7 +34,8 @@ public:
 
 	//Y estas no se para q sirven... tengo la impresion de q son privadas. No las hice yo. Favor de comunicarse con Alex
 	vector<Block>::iterator getCurr(void);
-
+	string getPath() { return path; }
+	void setPath(string _path) { path = _path; }
 	void clearBlockChain();
 	vector<Block>::iterator resetCurr(void);
 
@@ -46,4 +47,5 @@ private:
 	BlockChain blockChain;
 	MerkleTree tree;
 	vector<Block>::iterator curr;
+	string path;
 };

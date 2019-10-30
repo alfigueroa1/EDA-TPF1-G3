@@ -11,10 +11,24 @@ blockController::blockController(Model& model) {
 	m = &model;
 	currBlock = -1;
 	blocks = "";
+	showBlocks = false;
 }
 
 void blockController::update(void* model) {
 	m = (Model*)model;
+}
+
+void blockController::cycle() {
+	if (!showBlocks) {
+		askBlock(m->getPath());
+		showBlocks = true;
+	}
+	else
+		selectBlock(getFilename(m->getPath()));
+}
+
+void blockController::reAsk() {
+	showBlocks = false;
 }
 
 void blockController::askBlock(string path) 
@@ -54,3 +68,10 @@ void blockController::selectBlock(string filename) {
 
 	ImGui::End();
 }
+
+string blockController::getFilename(string filepath) {
+	int place = filepath.find_last_of('/');
+	filepath.erase(0, place + 1);
+	return filepath;
+}
+
