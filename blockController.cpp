@@ -25,6 +25,7 @@ void blockController::askBlock(string path)
 
 	for (int i = 0; i < m->getNumberOfBlocks(); i++) {
 
+		//m->resetCurr();
 		blocks += "Block" + to_string(i);
 		blocks += '\0';
 	}
@@ -46,7 +47,10 @@ void blockController::selectBlock(string filename) {
 	ImGui::NewLine();
 
 	if (ImGui::Combo("Bloques", &currBlock, blocks.c_str()))
-		m->openBlock(currBlock);
+	{
+		m->resetCurr();
+		m->openBlock((m->getCurr())[currBlock].height);
+	}
 
 	ImGui::End();
 }

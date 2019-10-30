@@ -36,7 +36,7 @@ public:
 	vector<Block>::iterator getCurr(void);
 
 	void clearBlockChain();
-
+	vector<Block>::iterator resetCurr(void);
 
 private:
 	bool selectedBlock;

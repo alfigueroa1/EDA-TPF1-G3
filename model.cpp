@@ -21,6 +21,12 @@ Model::~Model(void)
 
 }
 
+vector<Block>::iterator Model::resetCurr(void) 
+{ 
+	curr = blockChain.begin();
+	return curr; 
+}
+
 vector<Block>::iterator Model::getCurr(void) { return curr; }
 unsigned long int Model::getNumberOfBlocks(void) { return blockChain.size(); }
 
