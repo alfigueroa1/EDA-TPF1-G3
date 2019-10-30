@@ -3,7 +3,7 @@
 #include "imgui.h"
 #include "imgui_impl_allegro5.h"
 
-#include "controller.h"
+#include "controllerHandler.h"
 #include "model.h"
 #include "viewer.h"
 
@@ -14,17 +14,11 @@ static void start_frame(ALLEGRO_DISPLAY*& display, ALLEGRO_EVENT_QUEUE*& queue,b
 static void end_frame(ImVec4 color);
 
 
-void alexTesteaImGui(void);
 #define SCREEN_WIDTH	1280
 #define	SCREEN_HEIGHT	720
 
 int main() {
-	alexTesteaImGui();
-	return 0;
-}
-
-void alexTesteaImGui(void) {
-
+	
 	ALLEGRO_DISPLAY* display;
 	ALLEGRO_EVENT_QUEUE* queue;
 
@@ -35,6 +29,7 @@ void alexTesteaImGui(void) {
 	controllerHandler c(m);
 	Viewer v;
 
+	m.attach(c);
 	m.attach(v);
 
 	bool running = true;
@@ -47,6 +42,8 @@ void alexTesteaImGui(void) {
 		end_frame(backColor);
 	}
 	close_interface(display, queue);
+
+	return 0;
 }
 
 
