@@ -11,7 +11,7 @@ blockController::blockController(Model& model) {
 	m = &model;
 	currBlock = -1;
 	blocks = "";
-	showBlocks = false;
+	lastPath = "";
 }
 
 void blockController::update(void* model) {
@@ -19,17 +19,14 @@ void blockController::update(void* model) {
 }
 
 void blockController::cycle() {
-	if (!showBlocks) {
+	if (lastPath != m->getPath()) {
 		askBlock(m->getPath());
-		showBlocks = true;
+		lastPath = m->getPath();
 	}
 	else
 		selectBlock(getFilename(m->getPath()));
 }
 
-void blockController::reAsk() {
-	showBlocks = false;
-}
 
 void blockController::askBlock(string path) 
 {
