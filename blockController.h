@@ -10,13 +10,11 @@ public:
 	virtual void cycle();
 	void askBlock(string);
 	void selectBlock(string);
-	void reAsk();
 
 private:
 	Model* m;
 	int currBlock;
 	string blocks;
-	bool showBlocks;
-	string filepath;
+	string lastPath;
 	string getFilename(string);
 };
